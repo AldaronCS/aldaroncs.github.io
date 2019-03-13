@@ -11,6 +11,7 @@ First, we'll start with the boilerplate code (What we need to type to get anywhe
 </head>
 <body>
 </body>
+</html>
 ```
 
 Just copy the above code into a text file called `index.html` and then open it in Firefox.

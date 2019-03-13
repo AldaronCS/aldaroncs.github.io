@@ -1,26 +1,154 @@
-div{
-    width:90%;
-    max-width:1000px;
-    margin:0 auto
+/*
+ *      ================================================================================
+ *              .___. .     .__.  .___. .___. .___. .   .  .____ .____
+ *              |   | |     |   \ |   | |   / |  /| |\  |  |     |
+ *              |---| |     |   | |---| |--\  | / | | \ |  |     '---.
+ *              |   | |____ |___/ |   | |   \ |/__| |  \|  |____ ____/
+ * 	
+ *      ================================================================================
+ */
+
+div {
+    width: 90%;
+    max-width: 1000px;
+    margin: 0 auto;
 }
 
 pre {
+    margin-top:0px;
+    padding: 0px;
+    margin: 0px;
     font-size: 10pt;
 }
 
+body:before {
+    content: "\
+================================================================================\A\
+.___. .     .__.  .___. .___. .___. .   .  .____ .____\A\
+|   | |     |   \\ |   | |   / |  /| |\\  |  |     |    \A\
+|---| |     |   | |---| |--:  | / | | \\ |  |     '---.\A\
+|   | |____ |___/ |   | |   \\ |/__| |  \\|  |____ ____/\A\
+\A\
+================================================================================";
+    white-space: pre;
+    font-weight: 500;
+    color: rgb(0, 255, 0);
+    text-align: center;
+    display: block;
+    font-size: 10pt;
+    padding-bottom: 40px;
+    border-bottom: solid 1px;
+    border-color: #FFFFFF;
+    margin-bottom: 40px;
+}
+
+body:after {
+    content: " ";
+    white-space: pre;
+}
+
+span {
+    margin: 0px;
+    padding: 0px;
+}
+
+.copyright {
+    position: fixed;
+    left: 0px;
+    bottom: 0px;
+    width: 100%;
+}
+
+.copyright:after {
+    font-size: 8pt;
+    color: black;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: center;
+    display: block;
+    border-top: solid 1px;
+    border-color: #FFFFFF;
+    content: "Copyright © 2018-2019 Jeron Aldaron Lau.  All rights reserved.";
+    background: url("light_background.png");
+}
+
 h1, h2, h3, h4, h5, h6 {
-    margin:0 0 20px
+    margin: 0 0 20px
+}
+
+a {
+    color: #8080FF;
+    font-weight: normal;
+}
+
+a:hover {
+    color: #4040FF;
+    font-weight: bold;
 }
 
 code, p {
+    padding: 0px;
+    margin: 0px;
     font-size: 16px;
+    margin-bottom: 10px;
 }
 
 code {
     background: #202020;
+    white-space:pre;
+}
+
+html {
+    background: #001010;
 }
 
 body {
-    background: #000000;
-    color: #FFFFFF;
+	margin-top: 0px;
+	margin-bottom: 0px;
+    margin-left: 10px;
+    margin-right: 10px;
+	padding: 0px;
+
+    background: #080202;
+    color: #C0FFC0;
+    min-height: 100vh;
+
+    border-left: solid 1px;
+    border-right: solid 1px;
+    border-color: #FFFFFF;
+
+    background: url("background.png");
+    background-size: cover;
+    background-position: center;
+}
+
+.dashed_line {
+    border: dashed 2px;
+}
+
+hr {
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+li {
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+ul, ol {
+    margin-bottom: 80px;
+}
+
+div {
+    margin-bottom: 80px;
+}
+
+.code {
+    padding-top: 25px;
+    padding-bottom: 25px;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
 }
