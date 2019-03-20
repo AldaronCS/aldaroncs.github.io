@@ -1,3 +1,3 @@
 function doSomething() {
-	alert("Hello, World");
+	document.getElementById("thing").style = "background:#0000FF";
 }

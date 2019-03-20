@@ -11,7 +11,7 @@ function doSomething() {
 Add to your HTML under head: `<script href="script.js"></script>`
 
 Example:
-```
+```html
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
@@ -26,11 +26,13 @@ Example:
 ```
 
 The line where you have:
-```
+```html
 <div class="field">
 ```
 
 replace with:
-```
+```html
 <div class="field" onmousedown="doSomething()">
 ```
+
+*Now when you click on the div, it will open a popup that says "Hello, World".*

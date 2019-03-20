@@ -92,7 +92,7 @@ Next try changing `linear` to `ease`.
 ## Expressions!
 Update your animation to change facial expressions.
 
-```
+```css
 @keyframes animation {
 	0%   {top:0px; left:0px; background: url("https://aldaroncs.github.io/face.svg")}
 	20%  {top:400px; left:400px; background: url("https://aldaroncs.github.io/face.svg")}
