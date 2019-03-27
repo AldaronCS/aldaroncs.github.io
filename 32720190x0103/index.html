@@ -1,0 +1,109 @@
+<!--
+
+================================================================================
+             .___. .     .__.  .___. .___. .___. .   .  .____ .____
+             |   | |     |   \ |   | |   / |  /| |\  |  |     |
+             |---| |     |   | |---| |--\  | / | | \ |  |     '---.
+             |   | |____ |___/ |   | |   \ |/__| |  \|  |____ ____/
+	
+================================================================================
+
+-->
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	<title>AldaronCS</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="../style.css">
+    <script src="../script.js"></script>
+</head>
+<body>
+	<div>
+		<h1>AldaronCS - Web Development A - Unit 0x03 "Publishing Your Website (with GitHub)"</h1>
+
+        <p>To start off, lets cover some definitions.</p>
+        <ul>
+            <li>
+                VCS - Version Control System (A program that backs up each version of your website)
+            </li>
+            <li>
+                Command - Generally a program that only has a text interface.
+            </li>
+            <li>
+                Terminal - Command line (A text prompt where you can run programs)
+            </li>
+            <li>
+                Bash - The program that powers the terminal.
+            </li>
+            <li>
+                Git - A popular VCS.
+            </li>
+            <li>
+                Repository - A project in a VCS.
+            </li>
+            <li>
+                Static Website - A website that is just files with no server code.
+            </li>
+            <li>
+                GitHub - A website that stores your repository, and can host your repository as a static website.
+            </li>
+        </ul>
+
+        <h2>Step 1</h2>
+
+		<p>
+		<a href="https://github.com">Make an account</a>
+		</p>
+
+        <h2>Step 2</h2>
+        <p>Replace <code>username</code> with your username.  Make a repository:</p>
+        <p>
+        <code>username.github.io</code>
+        </p>
+
+        <h2>Step 3</h2>
+        <p>
+        On your repository page, find the clipboard and click it.  Open the terminal application and
+        type <code>git clone </code> (don't forget the trailing space).  And then paste with
+        Ctrl-SHIFT-V the URL of your repository.  Then press ENTER.
+        </p><p>
+        If you made a mistake, press the UP ARROW to look at what you previously typed.  Then you
+        can fix the error.  The DOWN ARROW will make the prompt empty again.  You can use the UP and
+        DOWN arrow keys to scroll through the entire history of what you typed into your terminal.
+        </p>
+
+        <h2>Step 4</h2>
+        <p>
+        Enter the repository by doing: <br/>
+        <code>cd username.github.io</code>
+        </p>
+        <p>
+        Don't forget to replace <code>username</code> with your username!
+        </p>
+
+        <h2>Step 5</h2>
+        <p>Move your website files into the folder using Files.</p>
+
+        <h2>Step 6</h2>
+        <p>Configure your username and email</p>
+        <code>
+git config --global user.name "Student"
+git config --global user.email "student@aldaroncs.github.io"</code>
+
+        <h2>Step 7</h2>
+        <p>Now we can upload our website:</p>
+        <code>
+git add .
+git commit -m "upload website"
+git push</code>
+
+        <h2>Step 8</h2>
+        <p>Enable your website on GitHub.</p>
+
+        <h1>Markdown</h1>
+        <p>Follow along to add a Markdown page to your website, and try inline HTML.</p>
+
+	</div>
+    <span class="copyright" style="width:100%"></span>
+</body>
+</html>
