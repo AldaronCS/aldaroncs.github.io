@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset=utf-8>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<title>Game</title>
+	<style>
+		body { margin: 0; overflow: hidden; }
+	</style>
+</head>
+<body>
+<!-- This is where the screen display is. -->
+<canvas id="gameCanvas">Your browser does not support the HTML5 canvas tag.</canvas>
+<!-- JavaScript in the HTML file with <script> tag. -->
+<script>
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///                                    JavaScript Code Begin                                    ///
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Define the variables
+var width = window.innerWidth || document.documentElement.clientWidth
+	|| document.body.clientWidth;
+var height = window.innerHeight || document.documentElement.clientHeight
+	|| document.body.clientHeight;
+var canvas = document.getElementById("gameCanvas");
+var time = performance.now();
+var prev = time;
+
+var inputLeft = false;
+var inputRight = false;
+var inputUp = false;
+var inputDown = false;
+
+var player_x = 0;
+var player_y = 5;
+
+// A list of tile columns.
+var world = [
+	[0, 0, 0, 0, 0, 1], // A column of blocks.
+	[0, 0, 0, 0, 1, 1],
+	[0, 0, 0, 0, 0, 1],
+	[0, 0, 0, 0, 0, 1],
+	[0, 0, 0, 0, 0, 1],
+	[0, 0, 0, 0, 0, 1],
+	[0, 0, 0, 0, 0, 1],
+	[0, 0, 0, 1, 0, 1],
+	[0, 0, 0, 1, 0, 1],
+	[0, 0, 0, 1, 0, 1],
+	[0, 0, 0, 1, 0, 1],
+	[0, 0, 0, 0, 0, 1],
+	[0, 0, 0, 0, 0, 1],
+	[0, 0, 0, 0, 0, 1],
+	[0, 0, 0, 0, 1, 1],
+	[0, 0, 0, 1, 1, 1],
+	[0, 0, 1, 1, 1, 1],
+	[0, 0, 1, 1, 1, 1],
+	[0, 2, 1, 1, 1, 1],
+	[0, 0, 1, 1, 1, 1],
+	[0, 0, 1, 1, 1, 1],
+];
+
+// This function gets run for every frame.
+var render = function() {
+	// Get the amount of time since last frame.
+	time = performance.now();
+	var diff = (time - prev) / 500;
+	prev = time;
+
+	// Update Player's Position
+	if (inputRight) {
+		player_x = player_x + diff;
+	} else if (inputLeft) {
+		player_x = player_x - diff;
+	} else if (inputUp && player_y > 1) {
+		player_y = player_y - (diff * 3);
+	}
+
+	if (player_x < 0) {
+		player_x = 0;
+	} else if (player_x >= world.length - 3) {
+		player_x = world.length - 3;
+	}
+
+	var playertile = world[Math.floor(player_x + 2.5)][Math.floor(player_y)];
+	var istalking = false;
+
+	if (world[Math.floor(player_x + 2.5)][Math.floor(player_y + (diff))] == 0) {
+		player_y += diff;
+	} else if (playertile == 1) {
+		player_y -= 1.0;
+	} else if (playertile == 2) {
+		istalking = true;
+	}
+
+	// Draw Background (Sky).
+	var c = document.getElementById("gameCanvas");
+	var ctx = c.getContext("2d");
+	ctx.fillStyle = "#5080F0";
+	ctx.fillRect(0, 0, width, height);
+
+	// Draw World.
+	for (var i = 0; i < world.length; i++) {
+		var column = world[i];
+		for (var j = 0; j < column.length; j++) {
+			var tile = column[j];
+			var x = (i - player_x) * height / 6;
+			var y = j * height / 6;
+			var s = height / 6;
+			if (tile == 0) {
+				// Draw nothing, there's nothing here.
+			} else if (tile == 1) {
+				// Draw a block.
+				ctx.fillStyle = "#309010";
+				ctx.fillRect(x, y, s, s);
+				ctx.fillStyle = "#208000";
+				ctx.fillRect(x, y + 5, s - 5, s - 5);
+			} else if (tile == 2) {
+				// Draw Person (Circle Face).
+				ctx.beginPath();
+				ctx.arc((0.5 + i - player_x) * height / 6, (0.5 + j) * height / 6, height / 13, 0, 2 * Math.PI);
+				ctx.stroke();
+				ctx.fillStyle = "#0000FF";
+				ctx.fill();
+				// Draw Player (Mouth)
+				ctx.beginPath();
+				ctx.moveTo((0.2 + i - player_x) * height / 6, (0.7 + j) * height / 6);
+				ctx.lineTo((0.8 + i - player_x) * height / 6, (0.7 + j) * height / 6);
+				ctx.stroke();
+				// Draw Player (Eyes)
+				ctx.beginPath();
+				ctx.moveTo((0.3 + i - player_x) * height / 6, (0.2 + j) * height / 6);
+				ctx.lineTo((0.3 + i - player_x) * height / 6, (0.5 + j) * height / 6);
+				ctx.moveTo((0.7 + i - player_x) * height / 6, (0.2 + j) * height / 6);
+				ctx.lineTo((0.7 + i - player_x) * height / 6, (0.5 + j) * height / 6);
+				ctx.stroke();
+			}
+		}
+	}
+
+	// Draw Player (Circle Face).
+	ctx.beginPath();
+	ctx.arc(2.5 * height / 6, (-0.5 + player_y) * height / 6, height / 13, 0, 2 * Math.PI);
+	ctx.stroke();
+	ctx.fillStyle = "#FFFF00";
+	ctx.fill();
+	// Draw Player (Mouth)
+	ctx.beginPath();
+	ctx.moveTo(2.2 * height / 6, (-0.3 + player_y) * height / 6);
+	ctx.lineTo(2.8 * height / 6, (-0.3 + player_y) * height / 6);
+	ctx.stroke();
+	// Draw Player (Eyes)
+	ctx.beginPath();
+	ctx.moveTo(2.3 * height / 6, (-0.8 + player_y) * height / 6);
+	ctx.lineTo(2.3 * height / 6, (-0.5 + player_y) * height / 6);
+	ctx.moveTo(2.7 * height / 6, (-0.8 + player_y) * height / 6);
+	ctx.lineTo(2.7 * height / 6, (-0.5 + player_y) * height / 6);
+	ctx.stroke();
+
+	// Draw info
+	ctx.font = "20px Georgia";
+	ctx.fillStyle = "#000000";
+	ctx.fillText("Hello World!", 10, 30);
+
+	//
+	if (istalking) {
+		ctx.fillStyle = "#FFFFFF";
+		ctx.fillRect(width / 4, height / 4, width / 2, height / 2);
+		ctx.fillStyle = "#000000";
+		ctx.fillText("Yo, I am the blue face!", (width / 4) + 20, (height / 4) + 40);
+	}
+
+	// Call this function again on the next frame.
+	requestAnimationFrame(render);
+};
+
+// Add Listener for Resize Event.
+window.onresize = function() {
+	width = window.innerWidth || document.documentElement.clientWidth
+		|| document.body.clientWidth;
+	height = window.innerHeight || document.documentElement.clientHeight
+		|| document.body.clientHeight;
+	canvas.width = width;
+	canvas.height = height;
+};
+
+// Add Listener for Keydown.
+window.onkeydown = function() {
+	if(event.keyCode == 37) {
+		inputLeft = true;
+	} else if(event.keyCode == 39) {
+		inputRight = true;
+	} else if(event.keyCode == 38) {
+		inputUp = true;
+	} else if(event.keyCode == 40) {
+		inputDown = true;
+	} else if(event.keyCode == 16) {
+		alert("Hello!");
+	}
+};
+
+// Add Listener for Keyup.
+window.onkeyup = function() {
+	if(event.keyCode == 37) {
+		inputLeft = false;
+	} else if(event.keyCode == 39) {
+		inputRight = false;
+	} else if(event.keyCode == 38) {
+		inputUp = false;
+		inputDown = false;
+	} else if(event.keyCode == 40) {
+		inputDown = false;
+		inputUp = false;
+	}
+};
+
+// Set canvas width and height.
+canvas.width = width;
+canvas.height = height;
+
+// Render the first frame.
+render();
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///                                     JavaScript Code End                                     ///
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+</script>
+</body>
+</html>
